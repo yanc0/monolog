@@ -16,6 +16,7 @@
         "php": ">=7.2",
         "psr/log": "^1.0.1"
     },
+    "repositories": [{"type":"path", "url": "./parallel-lint"}],
     "require-dev": {
         "aws/aws-sdk-php": "^2.4.9 || ^3.0",
         "doctrine/couchdb": "~1.0@dev",
@@ -23,7 +24,7 @@
         "graylog2/gelf-php": "^1.4.2",
         "php-amqplib/php-amqplib": "~2.4",
         "php-console/php-console": "^3.1.3",
-        "php-parallel-lint/php-parallel-lint": "^1.0",
+        "php-parallel-lint/php-parallel-lint": "dev-feature/33-ignore-startup-errors",
         "phpspec/prophecy": "^1.6.1",
         "phpunit/phpunit": "^8.5",
         "predis/predis": "^1.1",
@@ -61,7 +62,7 @@
     },
     "scripts": {
         "lint": [
-            "parallel-lint . --exclude vendor"
+            "parallel-lint . --exclude vendor --exclude parallel-lint"
         ],
         "test": [
             "phpunit"

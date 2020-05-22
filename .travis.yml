@@ -28,9 +28,13 @@ before_script:
   - echo "extension = redis.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
   - echo "extension = mongodb.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
   - composer self-update --snapshot
+  - git clone https://github.com/jrfnl/PHP-Parallel-Lint parallel-lint
+  - cd parallel-lint
+  - git checkout feature/33-ignore-startup-errors
+  - cd ../
   - if [ "$deps" == "low" ]; then composer update -n --prefer-dist --prefer-lowest --prefer-stable $COMPOSER_ARGS; fi
   - if [ "$deps" != "low" ]; then composer update -n --prefer-dist $COMPOSER_ARGS; fi
 
 script:
-  - if [ "`phpenv version-name`" != "nightly" ]; then composer lint; fi
+  - composer lint
   - composer test
